@@ -200,7 +200,7 @@ button:hover {
 #followup-section .impressum-link {
   position: fixed;     /* NICHT absolute – sondern fixed am Viewport */
   right: 50px;         /* Abstand vom rechten Bildschirmrand */
-  bottom: 10px;        /* Abstand vom unteren Bildschirmrand – anpassen */
+  bottom: 8px;        /* Abstand vom unteren Bildschirmrand – anpassen */
   font-size: 13px;
   color: #000;
   white-space: nowrap;
@@ -211,16 +211,6 @@ button:hover {
 #followup-section .impressum-link:hover {
   text-decoration: underline;
 }
-
-/* Responsives Verhalten für schmale Fenster */
-/*@media (max-width: 800px) {
-/*  #followup-section .impressum-link {
-/*    position: static;        /* nicht mehr absolut */
- /*   display: block;
- /*   text-align: right;       /* rechts ausrichten */
-/*    margin-top: 6px;         /* kleiner Abstand unter den Buttons */
-/*  }
-/*}
 
 /* Animation */
 @keyframes fadeInWord {
