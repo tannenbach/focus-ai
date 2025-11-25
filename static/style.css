@@ -289,9 +289,11 @@ button:hover,
 }
 
 .impressum-link {
-    color: #666;
+    display: inline-block;   /* damit margin wirkt, ohne Layout zu zerhauen */
+    margin-right: 16px;      /* etwas Abstand zu "Rounds" */
+    font-size: 13px;         /* etwas dezenter als der Rest */
+    color: #000;             /* schwarz, nicht blau */
     text-decoration: none;
-    font-size: 14px;
 }
 
 .impressum-link:hover {
