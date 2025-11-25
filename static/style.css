@@ -287,3 +287,23 @@ button:hover,
   margin-top: 50px;   /* increase as needed */
   margin-bottom: 10px;
 }
+.impressum-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.impressum-link:hover {
+    text-decoration: underline;
+}
+
+.impressum-page {
+    padding: 40px;
+    font-family: sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.impressum-container h1 {
+    margin-bottom: 20px;
+}
