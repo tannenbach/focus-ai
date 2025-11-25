@@ -117,7 +117,7 @@ button:hover {
 
 /* Fixierte Intervention-Sektion */
 #followup-section {
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -154,7 +154,7 @@ button:hover {
 /* Textarea: volle Breite */
 #followup-section .fi-text textarea {
   width: 100%;
-  max-width: 800px;
+  max-width: none;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -197,9 +197,8 @@ button:hover {
 
 /* Impressum rechts (Variante A: float) */
 .impressum-link {
-  position: absolute;
-  right: 0;
-  bottom: 22px; /* vertikale Feineinstellung */
+  float: right;
+  margin-top: -28px;     /* Feinjustierung vertikal */
   font-size: 13px;
   color: #000;
   white-space: nowrap;
