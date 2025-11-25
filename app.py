@@ -119,7 +119,7 @@ def build_system_prompt(agent_name: str, mtype: str, max_chars: int) -> str:
 
 # === Agent Definitions ===
 agents = [
-    ("GPT (Chat)", "gpt"),
+    ("ChatGPT", "gpt"),
     ("Claude",      "claude"),
     ("Mistral",     "mistral"),
 ]
