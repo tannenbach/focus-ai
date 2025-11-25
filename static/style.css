@@ -198,9 +198,14 @@ button:hover {
 
 /* Impressum: NICHT im Flow, absolut rechts unten im Facilitator-Bereich */
 #followup-section .impressum-link {
-  position: absolute;
-  right: -100px;        /* Abstand vom rechten Rand des Wrappers */
-  bottom: 12px;       /* vertikale Position im weißen Balken – bei Bedarf feinjustieren */
+/*  position: absolute;
+/*  right: -100px;        /* Abstand vom rechten Rand des Wrappers */
+/*  bottom: 12px;       /* vertikale Position im weißen Balken – bei Bedarf feinjustieren */
+    position: static;        /* nicht mehr absolut */
+    display: block;
+    text-align: right;       /* rechts ausrichten */
+    margin-top: 0px;         /* kleiner Abstand unter den Buttons */
+  
   font-size: 13px;
   color: #000;
   white-space: nowrap;
