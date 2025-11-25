@@ -135,11 +135,11 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* 4. Wrapper für Facilitator-Bereich */
+/* 4. Wrapper für Facilitator-Bereich – bündig mit Conversation */
 #followup-section .fu-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;      /* gleiche horizontale Einrückung wie #main-container */
   box-sizing: border-box;
 }
 
@@ -148,12 +148,13 @@ button:hover,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  max-width: 1000px;    /* gleiche max-Breite wie #log */
 }
 
-/* Intervention-Textarea */
+/* Intervention-Textarea – bündig mit Buttons/Export */
 #followup-section .fi-text textarea {
-  width: 300%;
-  max-width: 610px;
+  width: 100%;
+  max-width: 1000px;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -169,9 +170,9 @@ button:hover,
   gap: 10px;
 }
 
-/* Große Lücke vor Export-Button */
+/* Kein zusätzlicher Abstand mehr vor Export-Button */
 #followup-section .fi-controls #export-btn {
-  margin-left: 100px;
+  margin-left: 0;
 }
 
 /* Label-Feinheiten */
@@ -252,7 +253,7 @@ button:hover,
   max-height: 100%;
   resize: vertical;
   font-size: 14px;
-  padding: 8–10px;
+  padding: 8px 10px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -284,37 +285,42 @@ button:hover,
 
 /* Add more spacing above the System Prompt button */
 #systemprompt-btn {
-  margin-top: 50px;   /* increase as needed */
+  margin-top: 50px;
   margin-bottom: 10px;
 }
 
+/* Impressum-Link im Facilitator-Bereich */
 .impressum-link {
-    display: inline-block;   /* damit margin wirkt, ohne Layout zu zerhauen */
-    margin-right: 16px;      /* etwas Abstand zu "Rounds" */
-    font-size: 13px;         /* etwas dezenter als der Rest */
-    color: #000;             /* schwarz, nicht blau */
-    text-decoration: none;
+  display: inline-block;   /* damit margin wirkt, ohne Layout zu zerstören */
+  margin-right: 16px;      /* Abstand zu "Rounds" */
+  margin-left: 0;          /* ganz links */
+  font-size: 13px;         /* etwas dezenter als der Rest */
+  color: #000;             /* schwarz, nicht blau */
+  text-decoration: none;
 }
 
 .impressum-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
+/* Impressum-Seite */
 .impressum-page {
-    padding: 40px;
-    font-family: sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
+  padding: 40px;
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .impressum-container h1 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
+
+/* Link 'Zurück zur Hauptseite' */
 .back-link {
-    color: #000 !important;   /* Schwarz */
-    text-decoration: none;
+  color: #000 !important;   /* Schwarz */
+  text-decoration: none;
 }
 
 .back-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
