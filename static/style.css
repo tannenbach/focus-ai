@@ -154,7 +154,7 @@ button:hover {
 /* Textarea – volle Breite */
 #followup-section .fi-text textarea {
   width: 100%;
-  max-width: 720px;
+  max-width: 800px;
   height: 60px;
   resize: vertical;
   padding: 6px;
