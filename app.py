@@ -603,3 +603,8 @@ def export_conversation():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html')
+
