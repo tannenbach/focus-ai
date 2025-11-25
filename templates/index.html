@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Focus Group Discussion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Focus Group: Discussion with ChatGPT, Claude and Mistral AI Agents</h1>
+
+  <div id="main-container">
+    <!-- Initial Setup Section -->
+    <div class="form-section" id="initial-section">
+
+      <!-- System Prompt button at the top -->
+      <button id="systemprompt-btn">System Prompt</button>
+
+      <br><br>
+
+      <label for="facilitator">Initial question to the agents:</label><br>
+      <textarea id="facilitator" rows="4" class="full-width" placeholder="Type your question here..."></textarea><br>
+
+      <label for="rounds">Number of initial discussion rounds:</label><br>
+      <input type="number" id="rounds" class="full-width" min="1" max="10" value="3"><br>
+
+      <label for="chars">Target characters per agent response:</label><br>
+      <input type="number" id="chars" class="full-width" min="100" max="2000" value="250"><br>
+
+      <label class="checkbox-label">
+        <input type="checkbox" id="strict" checked>
+        Enforce strict character limit (truncate incomplete sentences)
+      </label>
+
+      <!-- Only Start Discussion here now -->
+      <button id="start-btn">Start Discussion</button>
+    </div>
+
+    <!-- Conversation Log -->
+    <h2>Conversation</h2>
+    <div id="log"></div>
+  </div>
+
+  <!-- Facilitator Intervention Section -->
+  <div id="followup-section" class="form-section">
+    <div class="fu-wrapper">
+      <div class="fi-inner">
+        <h3>Facilitator Intervention</h3>
+        <div class="fi-text">
+          <textarea id="followup" placeholder="Type your intervention question here..."></textarea>
+        </div>
+        <div class="fi-controls">
+          <label for="followup-rounds">Rounds:
+            <input type="number" id="followup-rounds" min="1" max="10" value="1">
+          </label>
+          <label for="followup-chars">Target characters:
+            <input type="number" id="followup-chars" min="100" max="2000" value="250">
+          </label>
+          <button id="intervene-btn">Stop</button>
+          <button id="followup-btn">Send Follow-Up</button>
+          <button id="export-btn"
+                  onclick="window.location.href='{{ url_for('export_conversation') }}'">
+            Export Conversation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- System Prompt Modal -->
+  <div id="systemprompt-modal" class="modal-backdrop">
+    <div class="modal-window">
+      <div class="modal-header">Edit System Prompt</div>
+      <div class="modal-body">
+        <textarea id="systemprompt-text"></textarea>
+        <div id="systemprompt-feedback"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-left">
+          <button id="systemprompt-reset-btn">Reset System Prompt</button>
+        </div>
+        <div class="modal-footer-right">
+          <button id="systemprompt-close-btn">Close</button>
+          <button id="systemprompt-save-btn">Save System Prompt</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("start-btn").addEventListener("click", startDiscussion);
+      document.getElementById("followup-btn").addEventListener("click", sendFacilitatorMessage);
+      document.getElementById("intervene-btn").addEventListener("click", interveneDiscussion);
+
+      // System Prompt Buttons
+      document.getElementById("systemprompt-btn").addEventListener("click", openSystemPromptModal);
+      document.getElementById("systemprompt-close-btn").addEventListener("click", closeSystemPromptModal);
+      document.getElementById("systemprompt-save-btn").addEventListener("click", saveSystemPrompt);
+      document.getElementById("systemprompt-reset-btn").addEventListener("click", resetSystemPrompt);
+    });
+
+    async function startDiscussion() {
+      document.getElementById("log").innerHTML = "";
+      const msg = document.getElementById("facilitator").value.trim();
+      const initial_rounds = parseInt(document.getElementById("rounds").value);
+      const max_characters = parseInt(document.getElementById("chars").value);
+      const strict_limit = document.getElementById("strict").checked;
+      if (!msg) return alert("Please enter an initial question.");
+
+      try {
+        const res = await fetch("/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg, initial_rounds, max_characters, strict_limit })
+        });
+        if (!res.ok) throw new Error("Start failed");
+        const data = await res.json();
+        appendEntry("Facilitator", data.facilitator);
+        getNextResponse();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function getNextResponse() {
+      try {
+        const res = await fetch("/next_response", { method: "POST" });
+        if (!res.ok) throw new Error("Next response failed");
+        const data = await res.json();
+        if (!data.speaker) return;
+
+        const span = appendEntry(data.speaker, "");
+        const words = data.text.split(/\s+/);
+        for (const [i, w] of words.entries()) {
+          const el = document.createElement("span");
+          el.textContent = (i ? " " : "") + w;
+          el.classList.add("word-fade");
+          el.style.animationDelay = `${i * 0.05}s`;
+          span.appendChild(el);
+          await new Promise(r => setTimeout(r, 50));
+        }
+        if (!data.done) getNextResponse();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function sendFacilitatorMessage() {
+      const text = document.getElementById("followup").value.trim();
+      const rounds = parseInt(document.getElementById("followup-rounds").value);
+      const chars = parseInt(document.getElementById("followup-chars").value);
+      if (!text) return alert("Please enter an intervention question.");
+
+      appendEntry("Facilitator", text);
+      document.getElementById("followup").value = "";
+
+      try {
+        const res = await fetch("/facilitator_input", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text, rounds, max_characters: chars })
+        });
+        if (!res.ok) throw new Error("Follow-up failed");
+        getNextResponse();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function interveneDiscussion() {
+      try {
+        const res = await fetch("/intervene", { method: "POST" });
+        if (!res.ok) throw new Error("Intervene failed");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function appendEntry(speaker, text) {
+      const entry = document.createElement("div");
+      entry.className = "entry chat-entry";
+      entry.innerHTML = `<strong>${speaker}:</strong> <span class="ai-speak">${text}</span>`;
+      document.getElementById("log").appendChild(entry);
+      return entry.querySelector(".ai-speak");
+    }
+
+    // === System Prompt Modal Logic ===
+    function openSystemPromptModal() {
+      const modal = document.getElementById("systemprompt-modal");
+      const textarea = document.getElementById("systemprompt-text");
+      const feedback = document.getElementById("systemprompt-feedback");
+      feedback.textContent = "";
+
+      fetch("/system_prompt", {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to load system prompt");
+        return res.json();
+      })
+      .then(data => {
+        textarea.value = data.system_prompt || "";
+        modal.classList.add("show");
+      })
+      .catch(err => {
+        console.error(err);
+        feedback.textContent = "Error loading current system prompt.";
+      });
+    }
+
+    function closeSystemPromptModal() {
+      const modal = document.getElementById("systemprompt-modal");
+      modal.classList.remove("show");
+    }
+
+    async function saveSystemPrompt() {
+      const textarea = document.getElementById("systemprompt-text");
+      const feedback = document.getElementById("systemprompt-feedback");
+      feedback.textContent = "Saving and testing system prompt...";
+
+      try {
+        const res = await fetch("/system_prompt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ system_prompt: textarea.value })
+        });
+        if (!res.ok) {
+          feedback.textContent = "Error: could not save system prompt.";
+          return;
+        }
+        const data = await res.json();
+        feedback.textContent = data.message || "System prompt updated.";
+        if (data.system_prompt) {
+          textarea.value = data.system_prompt;
+        }
+      } catch (err) {
+        console.error(err);
+        feedback.textContent = "Unexpected error while saving system prompt.";
+      }
+    }
+
+    async function resetSystemPrompt() {
+      const textarea = document.getElementById("systemprompt-text");
+      const feedback = document.getElementById("systemprompt-feedback");
+      feedback.textContent = "Resetting system prompt to default...";
+
+      try {
+        const res = await fetch("/system_prompt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reset: true })
+        });
+        if (!res.ok) {
+          feedback.textContent = "Error: could not reset system prompt.";
+          return;
+        }
+        const data = await res.json();
+        feedback.textContent = data.message || "System prompt reset to default.";
+        if (data.system_prompt) {
+          textarea.value = data.system_prompt;
+        }
+      } catch (err) {
+        console.error(err);
+        feedback.textContent = "Unexpected error while resetting system prompt.";
+      }
+    }
+  </script>
+</body>
+</html>
