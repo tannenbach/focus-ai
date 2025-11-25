@@ -43,7 +43,7 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
-/* Buttons: verhindern von Zeilenumbrüchen */
+/* Buttons */
 button,
 #start-btn,
 #intervene-btn,
@@ -123,7 +123,7 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* 3. Fixierte Intervention-Sektion */
+/* 3. Fixierte Intervention-Sektion (weißer Balken unten) */
 #followup-section {
   position: fixed;
   bottom: 0;
@@ -133,6 +133,20 @@ button:hover,
   padding: 15px 0;
   z-index: 1000;
   box-sizing: border-box;
+}
+
+/* 3a. Impressum-Link – ganz links im weißen Bereich */
+.impressum-link {
+  position: absolute;
+  left: 20px;       /* Abstand vom linken Rand des Fensters */
+  bottom: 15px;     /* Abstand vom unteren Rand des weißen Balkens */
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
+}
+
+.impressum-link:hover {
+  text-decoration: underline;
 }
 
 /* 4. Wrapper für Facilitator-Bereich */
@@ -147,13 +161,20 @@ button:hover,
 #followup-section .fi-inner {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;  /* volle Breite nutzen */
+  width: 100%;
 }
 
-/* Intervention-Textarea */
+/* Titel im Facilitator-Bereich */
+#followup-section h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* Intervention-Textarea – gleiche Breite wie Controls */
 #followup-section .fi-text textarea {
-  width: 300%;
-  max-width: 610px;
+  width: 100%;
+  max-width: none;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -162,16 +183,14 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* 6. Control-Leiste: Buttons und Inputs in einer Zeile */
+/* 6. Control-Leiste: rechtsbündig, gleiche Breite wie Textarea */
 #followup-section .fi-controls {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: flex-end;  /* Buttons und Inputs nach rechts schieben */
   gap: 10px;
-}
-
-/* Große Lücke vor Export-Button */
-#followup-section .fi-controls #export-btn {
-  margin-left: 100px;
+  width: 100%;
+  margin-top: 4px;
 }
 
 /* Label-Feinheiten */
@@ -185,6 +204,13 @@ button:hover,
   padding: 4px;
   font-size: 0.9rem;
   box-sizing: border-box;
+}
+
+/* (Optional) keine künstliche Lücke vor dem Export-Button mehr */
+/* Falls du wieder eine Lücke willst, kannst du das entkommentieren */
+
+#followup-section .fi-controls #export-btn {
+  margin-left: 100px;
 }
 
 /* Fade-In-Animation für Worte */
@@ -252,7 +278,7 @@ button:hover,
   max-height: 100%;
   resize: vertical;
   font-size: 14px;
-  padding: 8–10px;
+  padding: 8px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -284,6 +310,28 @@ button:hover,
 
 /* Add more spacing above the System Prompt button */
 #systemprompt-btn {
-  margin-top: 50px;   /* increase as needed */
+  margin-top: 50px;
   margin-bottom: 10px;
+}
+
+/* Impressum-Seite (falls verwendet) */
+.impressum-page {
+  padding: 40px;
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.impressum-container h1 {
+  margin-bottom: 20px;
+}
+
+/* Link 'Zurück zur Hauptseite' */
+.back-link {
+  color: #000 !important;   /* Schwarz */
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
 }
