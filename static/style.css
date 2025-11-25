@@ -211,6 +211,16 @@ button:hover {
   text-decoration: underline;
 }
 
+/* Responsives Verhalten für schmale Fenster */
+@media (max-width: 800px) {
+  #followup-section .impressum-link {
+    position: static;        /* nicht mehr absolut */
+    display: block;
+    text-align: right;       /* rechts ausrichten */
+    margin-top: 6px;         /* kleiner Abstand unter den Buttons */
+  }
+}
+
 /* Animation */
 @keyframes fadeInWord {
   from { opacity: 0; }
