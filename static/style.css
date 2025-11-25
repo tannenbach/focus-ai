@@ -133,6 +133,7 @@ button:hover {
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
+  position: relative; /* NEU: Bezugspunkt für Impressum */
 }
 
 /* Innerer Container */
@@ -190,22 +191,23 @@ button:hover {
   margin-left: 20px;
 }
 
-/* Export normal im Flow */
-#export-btn {
-  margin-left: 20px;
+/* Export rechts am Wrapper orientiert (innerhalb der Controls) */
+#followup-section .fi-controls #export-btn {
+  margin-left: auto;  /* schiebt Export ganz an den rechten Rand der Controls */
 }
 
-/* Impressum rechts (Variante A: float) */
-.impressum-link {
-  float: right;
-  margin-top: -28px;     /* Feinjustierung vertikal */
+/* Impressum: NICHT im Flow, absolut rechts unten im Facilitator-Bereich */
+#followup-section .impressum-link {
+  position: absolute;
+  right: 20px;        /* Abstand vom rechten Rand des Wrappers */
+  bottom: 12px;       /* vertikale Position im weißen Balken – bei Bedarf feinjustieren */
   font-size: 13px;
   color: #000;
   white-space: nowrap;
   text-decoration: none;
 }
 
-.impressum-link:hover {
+#followup-section .impressum-link:hover {
   text-decoration: underline;
 }
 
@@ -256,6 +258,7 @@ button:hover {
   margin-bottom: 10px;
 }
 
+/* Body streckt sich zwischen Header und Footer */
 .modal-body {
   flex: 1 1 auto;
   display: flex;
@@ -309,11 +312,11 @@ button:hover {
 .back-link:visited,
 .back-link:active,
 .back-link:focus {
-  color: #000 !important;
+  color: #000000 !important;
   text-decoration: none;
 }
 
 .back-link:hover {
-  color: #000 !important;
+  color: #000000 !important;
   text-decoration: underline;
 }
