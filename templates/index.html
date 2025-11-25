@@ -42,32 +42,29 @@
 
   <!-- Facilitator Intervention Section -->
   <div id="followup-section" class="form-section">
-    <!-- Impressum ganz links im weißen Bereich -->
-    <a href="/impressum" class="impressum-link">Impressum</a>
      <div class="fu-wrapper">
       <div class="fi-inner">
         <h3>Facilitator Intervention</h3>
         <div class="fi-text">
           <textarea id="followup" placeholder="Type your intervention question here..."></textarea>
         </div>
-        <div class="fi-controls">
-          <div class="fi-left">
-            <label for="followup-rounds">Rounds:
-              <input type="number" id="followup-rounds" min="1" max="10" value="1">
-            </label>
-            <label for="followup-chars">Target characters:
-              <input type="number" id="followup-chars" min="100" max="2000" value="250">
-            </label>
-          </div>
-          <div class="fi-right">
-            <button id="export-btn"
+    <div class="fi-controls">
+      <div class="fi-main">
+        <label for="followup-rounds">Rounds:
+          <input type="number" id="followup-rounds" min="1" max="10" value="1">
+        </label>
+        <label for="followup-chars">Target characters:
+          <input type="number" id="followup-chars" min="100" max="2000" value="250">
+        </label>
+        <button id="intervene-btn">Stop</button>
+        <button id="followup-btn">Send Follow-Up</button>
+      </div>
+      <button id="export-btn"
               onclick="window.location.href='{{ url_for('export_conversation') }}'">
-              Export Conversation
-            </button>
-            <button id="intervene-btn">Stop</button>
-            <button id="followup-btn">Send Follow-Up</button>
-         </div>
-       </div>
+        Export Conversation
+      </button>
+      <a href="/impressum" class="impressum-link">Impressum</a>
+    </div>
       </div>
     </div>
   </div>
