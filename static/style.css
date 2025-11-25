@@ -151,10 +151,10 @@ button:hover {
   align-self: flex-start;
 }
 
-/* Textarea – volle Breite */
+/* Textarea: volle Breite */
 #followup-section .fi-text textarea {
   width: 100%;
-  max-width: 800px;
+  max-width: none;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -169,7 +169,7 @@ button:hover {
   align-items: center;
   width: 100%;
   gap: 10px;
-  flex-wrap: nowrap;  /* alles in einer Zeile */
+  flex-wrap: nowrap;
 }
 
 /* Labels & Inputs */
@@ -190,20 +190,19 @@ button:hover {
   margin-left: 20px;
 }
 
-/* Export – ganz normaler Button direkt neben follow-up */
+/* Export normal im Flow */
 #export-btn {
-  margin-left: 40px; /* Abstand zu Send Follow-Up */
+  margin-left: 20px;
 }
 
-/* Impressum rechts daneben */
+/* Impressum rechts (Variante A: float) */
 .impressum-link {
-  margin-left: 60px;
+  float: right;
+  margin-top: -28px;     /* Feinjustierung vertikal */
   font-size: 13px;
   color: #000;
   white-space: nowrap;
   text-decoration: none;
-  position: relative;
-  top: 6px;   /* ← vertikale Feinjustierung */
 }
 
 .impressum-link:hover {
