@@ -89,7 +89,7 @@ button:hover {
 }
 
 /* Speaker label */
-.chat-entry strong,
+chat-entry strong,
 .entry strong {
   display: block;
   color: #222;
@@ -143,18 +143,17 @@ button:hover {
   width: 100%;
 }
 
-/* Titel linksbündig – wie Textfeld */
+/* Titel linksbündig */
 #followup-section h3 {
   margin-top: 0;
   margin-bottom: 8px;
   text-align: left;
-  width: calc(100% - 280px);
   align-self: flex-start;
 }
 
-/* Textarea—endet LINKS VON Export/Impressum */
+/* Textarea – volle Breite des Inhaltsbereichs */
 #followup-section .fi-text textarea {
-  width: calc(100% - 280px);
+  width: 100%;
   max-width: none;
   height: 60px;
   resize: vertical;
@@ -164,38 +163,17 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* DIE komplette Controls-Zeile—ohne extra div */
+/* komplette Controls-Zeile */
 #followup-section .fi-controls {
+  position: relative;      /* Basis für absolute Positionierung rechts */
   display: flex;
   align-items: center;
   width: 100%;
   gap: 10px;
+  padding-right: 260px;    /* Platz für Export + Impressum rechts */
 }
 
-/* Abstand Target → Stop */
-#intervene-btn {
-  margin-left: 20px;
-}
-
-/* Export ganz nach rechts */
-#export-btn {
-  margin-left: auto;
-}
-
-/* Impressum rechts von Export */
-.impressum-link {
-  margin-left: 30px;
-  font-size: 13px;
-  color: #000;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.impressum-link:hover {
-  text-decoration: underline;
-}
-
-/* Labels & Inputs */
+/* Labels & Inputs links */
 #followup-section .fi-controls label {
   white-space: nowrap;
   font-size: 0.95rem;
@@ -206,6 +184,35 @@ button:hover {
   padding: 4px;
   font-size: 0.9rem;
   box-sizing: border-box;
+}
+
+/* Abstand Target → Stop */
+#intervene-btn {
+  margin-left: 20px;
+}
+
+/* Export rechts, vertikal zentriert */
+#export-btn {
+  position: absolute;
+  top: 50%;
+  right: 120px;              /* Abstand vor Impressum */
+  transform: translateY(-50%);
+}
+
+/* Impressum ganz rechts, mit Abstand */
+.impressum-link {
+  position: absolute;
+  right: 0;
+  top: calc(50% + 14px);   /* 14px entspricht halber Button-Höhe */
+  transform: none;
+  font-size: 13px;
+  color: #000;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.impressum-link:hover {
+  text-decoration: underline;
 }
 
 /* Animation */
