@@ -325,6 +325,11 @@ button:hover {
 /* Mobile Layout: Buttons umbrechen */
 @media (max-width: 700px) {
 
+  /* Scrollbereich oberhalb des Fix-Balkens vergrößern */
+  #main-container {
+    margin-bottom: 400px;   /* statt 200px – genügend Platz zum Hochscrollen */
+  }
+
   #followup-section .fi-controls {
     flex-wrap: wrap;
     row-gap: 8px;
