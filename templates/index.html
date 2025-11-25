@@ -51,10 +51,10 @@
 
       <div class="fi-controls">
           <label for="followup-rounds">Rounds:
-            <input type="number" id="followup-rounds">
+            <input type="number" id="followup-rounds" min="1" max="10" value="3">
           </label> 
-          <label for="followup-chars">Target:
-            <input type="number" id="followup-chars">
+          <label for="followup-chars">Target characters:
+            <input type="number" id="followup-chars" min="100" max="2000" value="250">
           </label>
           <button id="intervene-btn">Stop</button>
           <button id="followup-btn">Send Follow-Up</button>
