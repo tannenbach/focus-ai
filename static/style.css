@@ -355,12 +355,3 @@ button:hover {
     margin-left: 0;           /* Desktop auto-margin entfernen */
   }
 
-  /* Impressum unter Export, ohne Überlappen */
-  #followup-section .impressum-link {
-    position: static;         /* nicht mehr absolut */
-    order: 13;                /* unter Export */
-    width: 100%;
-    text-align: right;
-    margin-top: 4px;
-  }
-}
