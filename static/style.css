@@ -151,11 +151,13 @@ button:hover,
   width: 100%;
 }
 
-/* Titel im Facilitator-Bereich */
+/* Titel im Facilitator-Bereich – linksbündig, wie das Textfeld */
 #followup-section h3 {
   margin-top: 0;
   margin-bottom: 8px;
-  text-align: center;
+  text-align: left;
+  width: calc(100% - 280px);  /* gleiche Breite wie Textfeld */
+  align-self: flex-start;
 }
 
 /* Facilitator-Textarea:
@@ -184,14 +186,24 @@ button:hover,
 /* Linke Gruppe: Rounds, Target, Stop, Send */
 #followup-section .fi-main {
   display: flex;
-  align-items: center;
+  align-items: flex-start;         /* Labels/Input oben bündig */
   gap: 10px;
-  max-width: calc(100% - 280px);  /* gleiche Breite wie Textarea */
+  max-width: calc(100% - 280px);   /* gleiche Breite wie Textarea */
+}
+
+/* Feintuning: Input ggf. leicht nach oben schieben */
+#followup-section .fi-main input[type="number"] {
+  margin-top: -2px;  /* bei Bedarf anpassen/entfernen */
 }
 
 /* Export-Button wandert nach rechts, Impressum daneben */
 #followup-section #export-btn {
   margin-left: auto;   /* schiebt Export + Impressum an den rechten Rand */
+}
+
+/* Abstand zwischen Target characters und Stop vergrößern */
+#intervene-btn {
+  margin-left: 24px;   /* Abstand zu Target characters */
 }
 
 /* Labels & Inputs in der Controls-Zeile */
@@ -207,9 +219,9 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* Impressum rechts vom Export-Button (inline) */
+/* Impressum rechts vom Export-Button (inline) – mit größerem Abstand */
 .impressum-link {
-  margin-left: 10px;
+  margin-left: 40px;   /* Abstand zu Export Conversation */
   font-size: 13px;
   color: #000;
   text-decoration: none;
