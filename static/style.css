@@ -114,7 +114,7 @@ button:hover,
   font-size: 16px;
 }
 
-/* 2. Scrollbarer Bereich oberhalb der Intervention */
+/* Scrollbarer Bereich oberhalb der Intervention */
 #main-container {
   flex: 1;
   overflow-y: auto;
@@ -123,7 +123,7 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* 3. Fixierte Intervention-Sektion (weißer Balken unten) */
+/* Fixierte Intervention-Sektion (weißer Balken unten) */
 #followup-section {
   position: fixed;
   bottom: 0;
@@ -135,22 +135,7 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* 3a. Impressum-Link – ganz links im weißen Bereich */
-.impressum-link {
-  position: absolute;
-  left: 20px;            /* Abstand zum linken Rand */
-  top: 50%;              /* vertikal mittig im weißen Balken */
-  transform: translateY(-50%);
-  font-size: 13px;
-  color: #000;
-  text-decoration: none;
-}
-
-.impressum-link:hover {
-  text-decoration: underline;
-}
-
-/* 4. Wrapper für Facilitator-Bereich */
+/* Wrapper für Facilitator-Bereich */
 #followup-section .fu-wrapper {
   max-width: 1000px;
   margin: 0 auto;
@@ -158,11 +143,11 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* 5. Facilitator controls container */
+/* Innerer Container */
 #followup-section .fi-inner {
   display: flex;
   flex-direction: column;
-  align-items: stretch;  /* volle Breite nutzen */
+  align-items: stretch;
   width: 100%;
 }
 
@@ -170,11 +155,15 @@ button:hover,
 #followup-section h3 {
   margin-top: 0;
   margin-bottom: 8px;
+  text-align: center;
 }
 
-/* Intervention-Textarea – gleiche Breite wie Controls */
+/* Facilitator-Textarea:
+   endet rechts beim Follow-Up-Button.
+   280px sind der reservierte Platz für
+   Export-Button + Impressum. */
 #followup-section .fi-text textarea {
-  width: 100%;
+  width: calc(100% - 280px);
   max-width: none;
   height: 60px;
   resize: vertical;
@@ -184,21 +173,28 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* 6. Control-Leiste: rechtsbündig, gleiche Breite wie Textarea */
+/* Controls-Zeile */
 #followup-section .fi-controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;  /* links: Rounds, rechts: Buttons */
   width: 100%;
   margin-top: 4px;
 }
-#followup-section .fi-left,
-#followup-section .fi-right {
+
+/* Linke Gruppe: Rounds, Target, Stop, Send */
+#followup-section .fi-main {
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: calc(100% - 280px);  /* gleiche Breite wie Textarea */
 }
 
+/* Export-Button wandert nach rechts, Impressum daneben */
+#followup-section #export-btn {
+  margin-left: auto;   /* schiebt Export + Impressum an den rechten Rand */
+}
+
+/* Labels & Inputs in der Controls-Zeile */
 #followup-section .fi-controls label {
   white-space: nowrap;
   font-size: 0.95rem;
@@ -211,24 +207,17 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* Label-Feinheiten */
-#followup-section .fi-controls label {
+/* Impressum rechts vom Export-Button (inline) */
+.impressum-link {
+  margin-left: 10px;
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
   white-space: nowrap;
-  font-size: 0.95rem;
 }
 
-#followup-section .fi-controls input[type="number"] {
-  width: 60px;
-  padding: 4px;
-  font-size: 0.9rem;
-  box-sizing: border-box;
-}
-
-/* (Optional) keine künstliche Lücke vor dem Export-Button mehr */
-/* Falls du wieder eine Lücke willst, kannst du das entkommentieren */
-
-#followup-section .fi-controls #export-btn {
-  margin-left: 100px;
+.impressum-link:hover {
+  text-decoration: underline;
 }
 
 /* Fade-In-Animation für Worte */
@@ -259,14 +248,14 @@ button:hover,
   display: flex;
 }
 
-/* Enlarged popup: roughly twice as tall as before */
+/* Popup-Fenster */
 .modal-window {
   background: #ffffff;
   padding: 16px 20px;
   border-radius: 6px;
   max-width: 900px;
   width: 100%;
-  height: 60vh;          /* high modal: ~60% viewport height */
+  height: 60vh;
   max-height: 60vh;
   box-sizing: border-box;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -280,7 +269,7 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* Body should stretch between header and footer */
+/* Body streckt sich zwischen Header und Footer */
 .modal-body {
   flex: 1 1 auto;
   display: flex;
@@ -292,7 +281,7 @@ button:hover,
   flex: 1 1 auto;
   width: 100%;
   height: 100%;
-  min-height: unset;      /* override any earlier min-height */
+  min-height: unset;
   max-height: 100%;
   resize: vertical;
   font-size: 14px;
@@ -307,7 +296,7 @@ button:hover,
   color: #333;
 }
 
-/* Modal footer with left/right zones */
+/* Modal footer mit linker/rechter Zone */
 .modal-footer {
   margin-top: 10px;
   display: flex;
@@ -326,7 +315,7 @@ button:hover,
   gap: 8px;
 }
 
-/* Add more spacing above the System Prompt button */
+/* Extra Abstand oberhalb des System-Prompt-Buttons */
 #systemprompt-btn {
   margin-top: 50px;
   margin-bottom: 10px;
@@ -346,7 +335,7 @@ button:hover,
 
 /* Link 'Zurück zur Hauptseite' */
 .back-link {
-  color: #000 !important;   /* Schwarz */
+  color: #000;
   text-decoration: none;
 }
 
