@@ -138,8 +138,9 @@ button:hover,
 /* 3a. Impressum-Link – ganz links im weißen Bereich */
 .impressum-link {
   position: absolute;
-  left: 20px;       /* Abstand vom linken Rand des Fensters */
-  bottom: 15px;     /* Abstand vom unteren Rand des weißen Balkens */
+  left: 20px;            /* Abstand zum linken Rand */
+  top: 50%;              /* vertikal mittig im weißen Balken */
+  transform: translateY(-50%);
   font-size: 13px;
   color: #000;
   text-decoration: none;
@@ -187,10 +188,27 @@ button:hover,
 #followup-section .fi-controls {
   display: flex;
   align-items: center;
-  justify-content: flex-end;  /* Buttons und Inputs nach rechts schieben */
-  gap: 10px;
+  justify-content: space-between;  /* links: Rounds, rechts: Buttons */
   width: 100%;
   margin-top: 4px;
+}
+#followup-section .fi-left,
+#followup-section .fi-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#followup-section .fi-controls label {
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+#followup-section .fi-controls input[type="number"] {
+  width: 60px;
+  padding: 4px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
 }
 
 /* Label-Feinheiten */
