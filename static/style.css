@@ -199,8 +199,8 @@ button:hover {
 /* Impressum: NICHT im Flow, absolut rechts unten im Facilitator-Bereich */
 #followup-section .impressum-link {
   position: fixed;     /* NICHT absolute – sondern fixed am Viewport */
-  right: 20px;         /* Abstand vom rechten Bildschirmrand */
-  bottom: 20px;        /* Abstand vom unteren Bildschirmrand – anpassen */
+  right: 50px;         /* Abstand vom rechten Bildschirmrand */
+  bottom: 10px;        /* Abstand vom unteren Bildschirmrand – anpassen */
   font-size: 13px;
   color: #000;
   white-space: nowrap;
@@ -213,14 +213,14 @@ button:hover {
 }
 
 /* Responsives Verhalten für schmale Fenster */
-@media (max-width: 800px) {
-  #followup-section .impressum-link {
-    position: static;        /* nicht mehr absolut */
-    display: block;
-    text-align: right;       /* rechts ausrichten */
-    margin-top: 6px;         /* kleiner Abstand unter den Buttons */
-  }
-}
+/*@media (max-width: 800px) {
+/*  #followup-section .impressum-link {
+/*    position: static;        /* nicht mehr absolut */
+ /*   display: block;
+ /*   text-align: right;       /* rechts ausrichten */
+/*    margin-top: 6px;         /* kleiner Abstand unter den Buttons */
+/*  }
+/*}
 
 /* Animation */
 @keyframes fadeInWord {
