@@ -154,7 +154,7 @@ button:hover {
 /* Textarea – volle Breite */
 #followup-section .fi-text textarea {
   width: 100%;
-  max-width: none;
+  max-width: 720px;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -192,16 +192,18 @@ button:hover {
 
 /* Export – ganz normaler Button direkt neben follow-up */
 #export-btn {
-  margin-left: 20px; /* Abstand zu Send Follow-Up */
+  margin-left: 40px; /* Abstand zu Send Follow-Up */
 }
 
 /* Impressum rechts daneben */
 .impressum-link {
-  margin-left: 20px;
+  margin-left: 60px;
   font-size: 13px;
   color: #000;
   white-space: nowrap;
   text-decoration: none;
+  position: relative;
+  top: 6px;   /* ← vertikale Feinjustierung */
 }
 
 .impressum-link:hover {
