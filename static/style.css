@@ -307,3 +307,11 @@ button:hover,
 .impressum-container h1 {
     margin-bottom: 20px;
 }
+.back-link {
+    color: #000 !important;   /* Schwarz */
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
