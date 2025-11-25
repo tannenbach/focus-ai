@@ -331,3 +331,41 @@ button:hover {
   color: #000000 !important;
   text-decoration: underline;
 }
+
+/* Mobile Layout: Buttons umbrechen */
+@media (max-width: 700px) {
+
+  #followup-section .fi-controls {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  /* Stop soll eigene Zeile beginnen */
+  #intervene-btn {
+    margin-left: 0;           /* Desktop-Offset entfernen */
+    order: 10;                /* etwas später als Rounds/Target */
+    width: 100%;              /* volle Breite */
+  }
+
+  /* Send Follow-Up unter Stop */
+  #followup-btn {
+    order: 11;
+    width: 100%;
+  }
+
+  /* Export Conversation unter Send Follow-Up */
+  #export-btn {
+    order: 12;
+    width: 100%;
+    margin-left: 0;           /* Desktop auto-margin entfernen */
+  }
+
+  /* Impressum unter Export, ohne Überlappen */
+  #followup-section .impressum-link {
+    position: static;         /* nicht mehr absolut */
+    order: 13;                /* unter Export */
+    width: 100%;
+    text-align: right;
+    margin-top: 4px;
+  }
+}
