@@ -89,7 +89,7 @@ button:hover {
 }
 
 /* Speaker label */
-chat-entry strong,
+.chat-entry strong,
 .entry strong {
   display: block;
   color: #222;
@@ -151,7 +151,7 @@ chat-entry strong,
   align-self: flex-start;
 }
 
-/* Textarea – volle Breite des Inhaltsbereichs */
+/* Textarea – volle Breite */
 #followup-section .fi-text textarea {
   width: 100%;
   max-width: none;
@@ -165,15 +165,14 @@ chat-entry strong,
 
 /* komplette Controls-Zeile */
 #followup-section .fi-controls {
-  position: relative;      /* Basis für absolute Positionierung rechts */
   display: flex;
   align-items: center;
   width: 100%;
   gap: 10px;
-  padding-right: 260px;    /* Platz für Export + Impressum rechts */
+  flex-wrap: nowrap;  /* alles in einer Zeile */
 }
 
-/* Labels & Inputs links */
+/* Labels & Inputs */
 #followup-section .fi-controls label {
   white-space: nowrap;
   font-size: 0.95rem;
@@ -191,20 +190,14 @@ chat-entry strong,
   margin-left: 20px;
 }
 
-/* Export rechts, vertikal zentriert */
+/* Export – ganz normaler Button direkt neben follow-up */
 #export-btn {
-  position: absolute;
-  top: 50%;
-  right: 120px;              /* Abstand vor Impressum */
-  transform: translateY(-50%);
+  margin-left: 20px; /* Abstand zu Send Follow-Up */
 }
 
-/* Impressum ganz rechts, mit Abstand */
+/* Impressum rechts daneben */
 .impressum-link {
-  position: absolute;
-  right: 0;
-  top: calc(50% + 14px);   /* 14px entspricht halber Button-Höhe */
-  transform: none;
+  margin-left: 20px;
   font-size: 13px;
   color: #000;
   white-space: nowrap;
