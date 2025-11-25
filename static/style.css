@@ -97,7 +97,7 @@ button:hover,
 }
 
 /* Speaker label */
-chat-entry strong,
+.chat-entry strong,
 .entry strong {
   display: block;
   color: #222;
@@ -135,11 +135,11 @@ chat-entry strong,
   box-sizing: border-box;
 }
 
-/* 4. Wrapper für Facilitator-Bereich – zentriert wie Conversation */
+/* 4. Wrapper für Facilitator-Bereich */
 #followup-section .fu-wrapper {
-  max-width: 1000px;     /* gleiche Breite wie #log */
-  margin: 0 auto;        /* zentriert */
-  padding: 0 20px;       /* gleiche Einrückung wie oben */
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -148,13 +148,12 @@ chat-entry strong,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
 }
 
-/* Intervention-Textarea – volle Containerbreite */
+/* Intervention-Textarea */
 #followup-section .fi-text textarea {
-  width: 100%;
-  max-width: 100%;
+  width: 300%;
+  max-width: 610px;
   height: 60px;
   resize: vertical;
   padding: 6px;
@@ -170,9 +169,9 @@ chat-entry strong,
   gap: 10px;
 }
 
-/* Kein zusätzlicher Abstand mehr vor Export-Button */
+/* Große Lücke vor Export-Button */
 #followup-section .fi-controls #export-btn {
-  margin-left: 0;
+  margin-left: 100px;
 }
 
 /* Label-Feinheiten */
@@ -253,7 +252,7 @@ chat-entry strong,
   max-height: 100%;
   resize: vertical;
   font-size: 14px;
-  padding: 8px 10px;
+  padding: 8–10px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -285,42 +284,6 @@ chat-entry strong,
 
 /* Add more spacing above the System Prompt button */
 #systemprompt-btn {
-  margin-top: 50px;
+  margin-top: 50px;   /* increase as needed */
   margin-bottom: 10px;
-}
-
-/* Impressum-Link im Facilitator-Bereich */
-.impressum-link {
-  display: inline-block;   /* damit margin wirkt, ohne Layout zu zerstören */
-  margin-right: 16px;      /* Abstand zu "Rounds" */
-  margin-left: 0;          /* ganz links */
-  font-size: 13px;         /* etwas dezenter als der Rest */
-  color: #000;             /* schwarz */
-  text-decoration: none;
-}
-
-.impressum-link:hover {
-  text-decoration: underline;
-}
-
-/* Impressum-Seite */
-.impressum-page {
-  padding: 40px;
-  font-family: sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.impressum-container h1 {
-  margin-bottom: 20px;
-}
-
-/* Link 'Zurück zur Hauptseite' */
-.back-link {
-  color: #000 !important;   /* Schwarz */
-  text-decoration: none;
-}
-
-.back-link:hover {
-  text-decoration: underline;
 }
