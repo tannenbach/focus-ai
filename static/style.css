@@ -64,8 +64,16 @@ button,
   white-space: nowrap;
 }
 
-button:hover {
-  background-color: #f0f0f0;
+button:hover,
+#start-btn:hover,
+#intervene-btn:hover,
+#followup-btn:hover,
+#export-btn:hover,
+#systemprompt-btn:hover,
+#systemprompt-save-btn:hover,
+#systemprompt-close-btn:hover,
+#systemprompt-reset-btn:hover {
+    background-color: #f0f0f0;
 }
 
 /* Conversation log */
