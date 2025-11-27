@@ -1,37 +1,135 @@
-/* static/style.css */
+/* =========================================================
+   AI Focus Group – Refactored Stylesheet
+   ---------------------------------------------------------
+   Structure:
+   1) Design tokens (colors, spacing, typography)
+   2) Page layout
+   3) Typography
+   4) Form elements
+   5) Buttons
+   6) Conversation log
+   7) Follow-up (facilitator) section
+   8) Impressum link
+   9) Word animation
+   10) System prompt modal
+   11) Impressum page
+   12) Mobile layout
+   ========================================================= */
 
-/* 1. Voller Viewport als Flex-Layout */
-html, body {
+/* ---------------------------------------------------------
+   1) Design Tokens
+   --------------------------------------------------------- */
+:root {
+  --font-family-base: Arial, sans-serif;
+
+  --color-bg-page: #f8f9fa;
+  --color-text-main: #333;
+  --color-text-strong: #222;
+
+  --color-border-soft: #ddd;
+  --color-border-button: #ccc;
+
+  --color-card-bg: #ffffff;
+
+  --color-btn-bg: #ffffff;
+  --color-btn-bg-hover: #f0f0f0;
+  --color-btn-text: #000000;
+
+  --spacing-page-padding: 20px;
+  --spacing-section-margin: 30px;
+
+  --radius-card: 4px;
+  --radius-modal: 6px;
+
+  --z-followup: 1000;
+  --z-modal-backdrop: 2000;
+  --z-impressum: 2001;
+}
+
+/* ---------------------------------------------------------
+   2) Page Layout
+   --------------------------------------------------------- */
+html,
+body {
   height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  padding: 20px;
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg-page);
+  padding: var(--spacing-page-padding);
   box-sizing: border-box;
 }
 
-/* Headings */
-h1, h2, h3 {
-  color: #333;
-  margin: 10px 0;
+/* Scrollable main container above the fixed facilitator bar */
+#main-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px;
+  margin-bottom: 200px; /* space above fixed followup bar */
+  box-sizing: border-box;
 }
 
-/* Form container */
-.form-section {
-  margin-bottom: 30px;
+/* Fixierte Intervention-Sektion (Facilitator bottom bar) */
+#followup-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 15px 0;
+  z-index: var(--z-followup);
+  box-sizing: border-box;
+}
+
+/* Wrapper inside the fixed bar */
+#followup-section .fu-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: relative; /* reference for children if needed */
+}
+
+/* Inner layout of follow-up section */
+#followup-section .fi-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   width: 100%;
 }
 
-/* Checkbox label */
+/* ---------------------------------------------------------
+   3) Typography
+   --------------------------------------------------------- */
+h1,
+h2,
+h3 {
+  color: var(--color-text-main);
+  margin: 10px 0;
+}
+
+#followup-section h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: left;
+  align-self: flex-start;
+}
+
+/* ---------------------------------------------------------
+   4) Form Elements
+   --------------------------------------------------------- */
+.form-section {
+  margin-bottom: var(--spacing-section-margin);
+  width: 100%;
+}
+
 .checkbox-label {
   display: block;
   margin: 10px 0;
   font-size: 16px;
 }
 
-/* Inputs and textareas */
 .full-width,
 textarea,
 input[type="number"] {
@@ -43,124 +141,7 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
-/* Buttons */
-button,
-#start-btn,
-#intervene-btn,
-#followup-btn,
-#export-btn,
-#systemprompt-btn,
-#systemprompt-save-btn,
-#systemprompt-close-btn,
-#systemprompt-reset-btn {
-  padding: 12px 24px;
-  font-size: 16px;
-  background-color: white;
-  border: 1px solid #ccc;
-  color: black;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  white-space: nowrap;
-}
-
-button:hover,
-#start-btn:hover,
-#intervene-btn:hover,
-#followup-btn:hover,
-#export-btn:hover,
-#systemprompt-btn:hover,
-#systemprompt-save-btn:hover,
-#systemprompt-close-btn:hover,
-#systemprompt-reset-btn:hover {
-    background-color: #f0f0f0;
-}
-
-/* Conversation log */
-#log {
-  max-width: 1000px;
-  width: 100%;
-  background-color: white;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* Chat entries */
-.entry,
-.chat-entry {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
-  margin-bottom: 1rem;
-}
-
-/* Speaker label */
-.chat-entry strong,
-.entry strong {
-  display: block;
-  color: #222;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* AI text content */
-.agent-text,
-.ai-speak {
-  min-height: 1em;
-  white-space: pre-wrap;
-  display: inline-block;
-  font-size: 16px;
-}
-
-/* Scrollbarer Bereich oberhalb der Intervention */
-#main-container {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 20px;
-  margin-bottom: 200px;
-  box-sizing: border-box;
-}
-
-/* Fixierte Intervention-Sektion */
-#followup-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  padding: 15px 0;
-  z-index: 1000;
-  box-sizing: border-box;
-}
-
-/* Wrapper */
-#followup-section .fu-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  position: relative; /* NEU: Bezugspunkt für Impressum */
-}
-
-/* Innerer Container */
-#followup-section .fi-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-}
-
-/* Titel linksbündig */
-#followup-section h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  text-align: left;
-  align-self: flex-start;
-}
-
-/* Textarea: volle Breite */
+/* Follow-up textarea (facilitator input) */
 #followup-section .fi-text textarea {
   width: 100%;
   max-width: none;
@@ -172,7 +153,99 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* komplette Controls-Zeile */
+/* ---------------------------------------------------------
+   5) Buttons
+   --------------------------------------------------------- */
+/* Base button styling for all interactive buttons in the app */
+button,
+#start-btn,
+#intervene-btn,
+#followup-btn,
+#export-btn,
+#systemprompt-btn,
+#systemprompt-save-btn,
+#systemprompt-close-btn,
+#systemprompt-reset-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-border-button);
+  color: var(--color-btn-text);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+/* Unified hover effect – this fixes your previous hover issue */
+button:hover,
+#start-btn:hover,
+#intervene-btn:hover,
+#followup-btn:hover,
+#export-btn:hover,
+#systemprompt-btn:hover,
+#systemprompt-save-btn:hover,
+#systemprompt-close-btn:hover,
+#systemprompt-reset-btn:hover {
+  background-color: var(--color-btn-bg-hover);
+}
+
+/* Specific offset for desktop layout */
+#intervene-btn {
+  margin-left: 20px;
+}
+
+/* Place export button at the far right in the controls row (desktop) */
+#followup-section .fi-controls #export-btn {
+  margin-left: auto;
+}
+
+/* System prompt trigger button spacing at top */
+#systemprompt-btn {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------------
+   6) Conversation Log
+   --------------------------------------------------------- */
+#log {
+  max-width: 1000px;
+  width: 100%;
+  background-color: var(--color-card-bg);
+  padding: 15px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.entry,
+.chat-entry {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  margin-bottom: 1rem;
+}
+
+.chat-entry strong,
+.entry strong {
+  display: block;
+  color: var(--color-text-strong);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.agent-text,
+.ai-speak {
+  min-height: 1em;
+  white-space: pre-wrap;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* ---------------------------------------------------------
+   7) Follow-up Section Controls
+   --------------------------------------------------------- */
 #followup-section .fi-controls {
   display: flex;
   align-items: center;
@@ -181,7 +254,6 @@ button:hover,
   flex-wrap: nowrap;
 }
 
-/* Labels & Inputs */
 #followup-section .fi-controls label {
   white-space: nowrap;
   font-size: 0.95rem;
@@ -194,36 +266,34 @@ button:hover,
   box-sizing: border-box;
 }
 
-/* Abstand Target → Stop */
-#intervene-btn {
-  margin-left: 20px;
-}
-
-/* Export rechts am Wrapper orientiert (innerhalb der Controls) */
-#followup-section .fi-controls #export-btn {
-  margin-left: auto;  /* schiebt Export ganz an den rechten Rand der Controls */
-}
-
-/* Impressum: NICHT im Flow, absolut rechts unten im Facilitator-Bereich */
+/* ---------------------------------------------------------
+   8) Impressum Link (fixed bottom-right)
+   --------------------------------------------------------- */
 #followup-section .impressum-link {
-  position: fixed;     /* NICHT absolute – sondern fixed am Viewport */
-  right: 50px;         /* Abstand vom rechten Bildschirmrand */
-  bottom: 8px;        /* Abstand vom unteren Bildschirmrand – anpassen */
+  position: fixed;
+  right: 50px;
+  bottom: 8px;
   font-size: 13px;
-  color: #000;
+  color: #000000;
   white-space: nowrap;
   text-decoration: none;
-  z-index: 2001;       /* sicher über allem */
+  z-index: var(--z-impressum);
 }
 
 #followup-section .impressum-link:hover {
   text-decoration: underline;
 }
 
-/* Animation */
+/* ---------------------------------------------------------
+   9) Word Fade-in Animation for Streaming Text
+   --------------------------------------------------------- */
 @keyframes fadeInWord {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .word-fade {
@@ -232,15 +302,17 @@ button:hover,
   animation: fadeInWord 0.3s ease forwards;
 }
 
-/* === System Prompt Modal === */
+/* ---------------------------------------------------------
+   10) System Prompt Modal
+   --------------------------------------------------------- */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: var(--z-modal-backdrop);
 }
 
 .modal-backdrop.show {
@@ -250,13 +322,13 @@ button:hover,
 .modal-window {
   background: #ffffff;
   padding: 16px 20px;
-  border-radius: 6px;
+  border-radius: var(--radius-modal);
   max-width: 900px;
   width: 100%;
   height: 60vh;
   max-height: 60vh;
   box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
 }
@@ -267,7 +339,7 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* Body streckt sich zwischen Header und Footer */
+/* Body stretches between header and footer */
 .modal-body {
   flex: 1 1 auto;
   display: flex;
@@ -305,12 +377,9 @@ button:hover,
   gap: 8px;
 }
 
-#systemprompt-btn {
-  margin-top: 50px;
-  margin-bottom: 10px;
-}
-
-/* Impressum-Seite */
+/* ---------------------------------------------------------
+   11) Impressum Page Layout
+   --------------------------------------------------------- */
 .impressum-page {
   padding: 40px;
   max-width: 800px;
@@ -330,12 +399,13 @@ button:hover,
   text-decoration: underline;
 }
 
-/* Mobile Layout: Buttons umbrechen */
+/* ---------------------------------------------------------
+   12) Mobile Layout
+   --------------------------------------------------------- */
 @media (max-width: 700px) {
-
-  /* Scrollbereich oberhalb des Fix-Balkens vergrößern */
+  /* More space for scrolling above the fixed bar on small screens */
   #main-container {
-    margin-bottom: 400px;   /* statt 200px – genügend Platz zum Hochscrollen */
+    margin-bottom: 400px; /* allow scrolling up to see Start button, etc. */
   }
 
   #followup-section .fi-controls {
@@ -343,23 +413,23 @@ button:hover,
     row-gap: 8px;
   }
 
-  /* Stop soll eigene Zeile beginnen */
+  /* Stop button on its own line */
   #intervene-btn {
-    margin-left: 0;           /* Desktop-Offset entfernen */
-    order: 10;                /* etwas später als Rounds/Target */
-    width: 100%;              /* volle Breite */
+    margin-left: 0;
+    order: 10;
+    width: 100%;
   }
 
-  /* Send Follow-Up unter Stop */
+  /* Send Follow-Up below Stop */
   #followup-btn {
     order: 11;
     width: 100%;
   }
 
-  /* Export Conversation unter Send Follow-Up */
+  /* Export Conversation below Send Follow-Up */
   #export-btn {
     order: 12;
     width: 100%;
-    margin-left: 0;           /* Desktop auto-margin entfernen */
+    margin-left: 0; /* remove desktop auto-margin */
   }
-
+}
